@@ -6,23 +6,30 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
 
-public class YourPlane extends Plane {
+public class YourPlane extends Plane implements Subject {
     private int direction;
     private Vector<Bullet> vectorB = new Vector<Bullet>();
+    private Vector<Observer> vectorO = new Vector<Observer>();
 
     public void setDirection(int direction) {
         this.direction = direction;
     }
-
     public int getDirection() {
         return direction;
     }
+    public int getWidth() {
+        return getSprite().getWidth();
+    }
+    public int getHeight() {
+        return getSprite().getHeight();
+    }
 
-    public YourPlane(int positionX, int positionY, int speed, int planeType) {
+    public YourPlane(int positionX, int positionY, int speed, int planeType, int health) {
         setPositionX(positionX);
         setPositionY(positionY);
         setSpeed(speed);
         setPlaneType(planeType);
+        setHealth(health);
         switch(planeType) {
             case 1:
                 try {
@@ -54,19 +61,10 @@ public class YourPlane extends Plane {
                 break;
         }
     }
-
     public void moveByMouse(int x, int y) {
         setPositionX(x);
         setPositionY(y);
-         /* PointerInfo a = MouseInfo.getPointerInfo();
-            Point b = a.getLocation();
-            int x = (int) b.getX();
-            int y = (int) b.getY();
-            setPositionX(x);
-            setPositionY(y); */
-
     }
-
     private void moveByKey() {
         if(this.direction == 1) {
             setPositionX(getPositionX() - getSpeed());
@@ -80,26 +78,41 @@ public class YourPlane extends Plane {
     }
     @Override
     public void shot() {
-        super.shot();
-        Bullet bullet = new Bullet(getPositionX() + 29, getPositionY(), 10, 1, 1);
+        Bullet bullet = new Bullet((int)getPositionX() + 29, (int)getPositionY(), 10, 1, 1);
         vectorB.add(bullet);
     }
 
     @Override
     public void update() {
-        super.update();
         for(Bullet b : vectorB) {
             b.update();
         }
         this.moveByKey();
     }
-
     @Override
     public void draw(Graphics g) {
-        super.draw(g);
-        g.drawImage(getSprite(), getPositionX(), getPositionY(), null);
+        g.drawImage(getSprite(),(int) getPositionX(),(int) getPositionY(), null);
         for(Bullet b : vectorB) {
             b.draw(g);
+        }
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        vectorO.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        vectorO.remove(observer);
+    }
+
+    @Override
+    public void notifyObserver() {
+        if(true) {
+            for(Observer o : vectorO) {
+                o.update("Bo may an duoc qua roi !");
+            }
         }
     }
 }

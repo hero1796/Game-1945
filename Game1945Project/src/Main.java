@@ -6,10 +6,4 @@ public class Main {
         thread.start();
     }
 }
-
-/*- Thiết kế class PlaneAbstract
-- Tạo viên đạn sao cho phù hợp vs cả địch cả ta.
-        - Thiết kế thêm 2 con EnemyPlane nữa
-        + 1 con thì di chuyển theo hình Elip, bắn đạn đôi
-        + 1 con di chuyển như bình thường, nhưng bắn đạn chéo tẽ làm 3.
-        - Giảm kích thước con EnemyPlane xuống.*/
+//bat va cham cua 2 hinh chu nhat dan do YourPlane ban ra va EnemyPlane neu cham thi lam mat di

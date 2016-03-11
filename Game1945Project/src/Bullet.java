@@ -34,6 +34,10 @@ public class Bullet extends GameObject {
         this.bulletType = bulletType;
     }
 
+    private Bullet() {
+
+    }
+
     public Bullet(int positionX, int positionY, int speed, int bulletType, int moveType) {
         setPositionX(positionX);
         setPositionY(positionY);
@@ -58,35 +62,25 @@ public class Bullet extends GameObject {
                 break;
         }
     }
-    //di chuyen cheo'
-    private void moveObliquelyLeft() {
-        int z = (int) Math.round((double) (this.speed)/(Math.cos(45)));
-        setPositionX(getPositionX() - z);
-        setPositionY(getPositionY() + z);
-    }
-    private void moveObliquelyRight() {
-        int z = (int) Math.round((double) (this.speed)/(Math.cos(45)));
-        setPositionX(getPositionX() + z);
-        setPositionY(getPositionY() + z);
-    }
-    private void moveNomally() {
-        setPositionY(getPositionY() - this.speed);
+    public void move() {
+        if(this.moveType == 1) {
+            setPositionY(getPositionY() - this.speed);
+        } else if(this.moveType == 2) {
+            int z = (int) Math.round((double) (this.speed)/(Math.cos(45)));
+            setPositionX(getPositionX() - z);
+            setPositionY(getPositionY() + z);
+        } else if(this.moveType == 3) {
+            int z = (int) Math.round((double) (this.speed)/(Math.cos(45)));
+            setPositionX(getPositionX() + z);
+            setPositionY(getPositionY() + z);
+        }
     }
     @Override
     public void update() {
-        super.update();
-        if(this.moveType == 1) {
-            this.moveNomally();
-        } else if(this.moveType == 2) {
-            this.moveObliquelyLeft();
-        } else if(this.moveType == 3) {
-            this.moveObliquelyRight();
-        }
+        this.move();
     }
-
     @Override
     public void draw(Graphics g) {
-        super.draw(g);
-        g.drawImage(getSprite(), getPositionX(), getPositionY(), null);
+        g.drawImage(getSprite(), (int)getPositionX(), (int)getPositionY(), null);
     }
 }

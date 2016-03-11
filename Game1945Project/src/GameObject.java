@@ -5,31 +5,23 @@ import java.awt.image.BufferedImage;
  * Created by Administrator on 3/1/2016.
  */
 public abstract class GameObject {
-    private int positionX;
-    private int positionY;
+    private double positionX;
+    private double positionY;
     private BufferedImage sprite;
 
-    public void update() {
-
-    }
-
-    public void draw(Graphics g) {
-
-    }
-
-    public int getPositionX() {
+    public double getPositionX() {
         return positionX;
     }
 
-    public void setPositionX(int positionX) {
+    public void setPositionX(double positionX) {
         this.positionX = positionX;
     }
 
-    public int getPositionY() {
+    public double getPositionY() {
         return positionY;
     }
 
-    public void setPositionY(int positionY) {
+    public void setPositionY(double positionY) {
         this.positionY = positionY;
     }
 
@@ -40,4 +32,7 @@ public abstract class GameObject {
     public void setSprite(BufferedImage sprite) {
         this.sprite = sprite;
     }
+
+    public abstract void update();
+    public abstract void draw(Graphics g);
 }

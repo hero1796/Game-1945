@@ -40,7 +40,5 @@ public abstract class Plane extends GameObject {
         this.planeType = planeType;
     }
 
-    public void shot() {
-
-    }
+    public abstract void shot();
 }
